@@ -1,0 +1,4 @@
+auth:
+  ignore_urls:
+    - /s/user/users/login
+    - /s/user/users/register
