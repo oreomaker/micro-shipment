@@ -5,17 +5,21 @@ import com.wgzmb._common.vo.OrderVO;
 import com.wgzmb.component.BaseResponse;
 import com.wgzmb.component.UserInfo;
 import com.wgzmb.service.ShipOrderService;
+import com.wgzmb.service.UserFeignInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/order")
 public class OrderController {
     @Autowired
     private ShipOrderService orderService;
+    @Resource
+    private UserFeignInterface userFeignInterface;
 
     @GetMapping("{id}")
     public BaseResponse getOrder(@PathVariable Integer id) {
@@ -49,5 +53,10 @@ public class OrderController {
                 orderShipmentVO.getOrderId(),
                 orderShipmentVO.getDescription(),
                 orderShipmentVO.getType());
+    }
+
+    @PostMapping("/user-info")
+    public BaseResponse info(@RequestHeader("Authorization") String token) {
+        return userFeignInterface.info(token);
     }
 }

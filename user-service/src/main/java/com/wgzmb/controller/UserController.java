@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -31,6 +31,11 @@ public class UserController {
 
     @PostMapping("/info")
     BaseResponse info(@RequestHeader("Authorization") String token) {
+        return userService.info(token);
+    }
+
+    @GetMapping("/info/{token}")
+    BaseResponse info2(@PathVariable("token") String token) {
         return userService.info(token);
     }
 }

@@ -17,17 +17,17 @@ spring:
           predicates:
             - name: Path
               args:
-                pattern: /order/**
+                pattern: /v1/order/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
         - id: user-service
           uri: lb://user-service
           predicates:
             - name: Path
               args:
-                pattern: /user/**
+                pattern: /v1/user/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
 
 management:
   endpoints:
